@@ -10,4 +10,4 @@ migrate:
 superuser:
 	python3 manage.py createsuperuser
 
-.PHONY: run makemigrations migrate
+.PHONY: run makemigrations migrate superuser
