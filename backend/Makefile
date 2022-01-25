@@ -1,4 +1,7 @@
 run:
+	python3 manage.py runserver localhost:1111
+
+defaultrun:
 	python3 manage.py runserver
 
 makemigrations:
@@ -10,4 +13,4 @@ migrate:
 superuser:
 	python3 manage.py createsuperuser
 
-.PHONY: run makemigrations migrate superuser
+.PHONY: run makemigrations migrate superuser defaultrun
