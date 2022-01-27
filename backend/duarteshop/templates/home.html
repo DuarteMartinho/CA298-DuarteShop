@@ -1,12 +1,18 @@
 {%  extends "base.html" %}
 
-{% block title %}Hello {{title}}{%  endblock %}
+{% block title %}{{title}}{%  endblock %}
 
 {%  block content %}
-   <p>Hello {{name}}</p>
+   <h2>My products</h2>
    <ul>
-   {% for i in names %}
-        <li>{{name}}</li>
+   {% for p in products %}
+      <li>
+         <h5>{{p.name}}</h5>
+         <p>{{p.description}} - {{p.price}} €</p>
+         <a href="product/{{ p.id }}">
+            <img src="{{ p.image.url }}" alt="{{p.name}}" height="100" width="100" />
+         </a>
+      </li>
    {% endfor %}
 </ul>
 {%  endblock %}
