@@ -6,6 +6,6 @@
     <form action="." method="POST">
         {% csrf_token %}
         {{ form.as_table }}
-        <button type="submit">SUBMIT</button>
+        <button type="submit" class="btn btn-primary">SUBMIT</button>
     </form>
 {%  endblock %}

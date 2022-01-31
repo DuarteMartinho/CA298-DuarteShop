@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from django.views.generic import CreateView
 from django.contrib.auth import login, logout
+from django.contrib.auth.views import LoginView
 from .forms import *
 from .models import *
 
@@ -29,3 +30,11 @@ class UserSignupView(CreateView):
         user = form.save()
         login(self.request, user)
         return redirect('/')
+
+class UserLoginView(LoginView):
+    template_name='login.html'
+
+
+def logout_user(request):
+    logout(request)
+    return redirect("/")
