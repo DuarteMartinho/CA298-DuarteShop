@@ -3,5 +3,9 @@
 {% block title %}Sign UP{%  endblock %}
 
 {%  block content %}
-
+    <form action="." method="POST">
+        {% csrf_token %}
+        {{ form.as_table }}
+        <button type="submit">SUBMIT</button>
+    </form>
 {%  endblock %}
