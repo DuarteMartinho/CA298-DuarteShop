@@ -13,3 +13,4 @@ def home(request):
 def product_individual(request, prodId):
     product = Product.objects.get(id=prodId)
     return render(request, 'product_individual.html', {'product': product})
+
