@@ -45,20 +45,22 @@ def add_to_basket(request, prodid):
     user = request.user
     # is there a shopping basket for the user 
     basket = Basket.objects.filter(user_id=user, is_active=True).first()
-    if not basket:
+    if basket is None:
         # create a new one
-        basket = Basket(user_id = user).save()
+        Basket.objects.create(user_id = user)
+        basket = Basket.objects.filter(user_id=user, is_active=True).first()
     # get the product 
     product = Product.objects.get(id=prodid)
     sbi = BasketItem.objects.filter(basketId=basket, productId = product).first()
     if sbi is None:
         # there is no basket item for that product 
         # create one 
-        sbi = BasketItem(basketId=basket, productId = product).save()
+        sbi = BasketItem(basketId=basket, productId = product)
+        sbi.save()
     else:
         # a basket item already exists 
         # just add 1 to the quantity
-        sbi.quantity = sbi.quantity+1
+        sbi.quantity = sbi.quantity + 1
         sbi.save()
     return render(request, 'product_individual.html', {'product': product, 'added':True})
 
