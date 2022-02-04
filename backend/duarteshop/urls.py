@@ -9,4 +9,5 @@ urlpatterns = [
    path('login/',views.UserLoginView.as_view(template_name="login.html", authentication_form=UserLoginForm)),
    path('logout/', views.logout_user, name="logout"),
    path('addbasket/<int:prodid>', views.add_to_basket, name="add_basket"),
+   path('basket/', views.show_basket, name="show_basket"),
 ]

@@ -64,3 +64,23 @@ def add_to_basket(request, prodid):
         sbi.save()
     return render(request, 'product_individual.html', {'product': product, 'added':True})
 
+@login_required
+def show_basket(request):
+    # get the user object
+    # does a shopping basket exist ? if not you shopping basket is empty 
+    # load all shoping basket items
+    # display
+
+    user = request.user
+    basket = Basket.objects.filter(user_id=user, is_active=True).first()
+    if basket is None:
+        return render(request, 'basket.html', {'empty': True})
+    else:
+        sbi = BasketItem.objects.filter(basketId=basket)
+        # is this empty ? 
+        if sbi.exists():
+            # normal flow
+            return render(request, 'basket.html', {'basket': basket, 'sbi': sbi})
+        else:
+            return render(request, 'basket.html', {'empty': True})
+
