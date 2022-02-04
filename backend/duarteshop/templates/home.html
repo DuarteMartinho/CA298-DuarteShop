@@ -3,16 +3,29 @@
 {% block title %}{{title}}{%  endblock %}
 
 {%  block content %}
-   <h2>My products</h2>
-   <ul>
-   {% for p in products %}
-      <li>
-         <h5>{{p.name}}</h5>
-         <p>{{p.description}} - {{p.price}} €</p>
-         <a href="product/{{ p.id }}">
-            <img src="{{ p.image.url }}" alt="{{p.name}}" height="100" width="100" />
-         </a>
-      </li>
-   {% endfor %}
-</ul>
+   <center>
+      <h2>My products</h2>
+   </center>   
+
+
+   <div class="container">
+      {% for p in products %}
+            {% cycle 1 2 3 4 as index silent%}
+            {% if index == 1 %}
+                <div class="row">
+            {% endif %}
+
+               <div class="col">
+                  <h5>{{p.name}}</h5>
+                  <p>{{p.description}} - {{p.price}} €</p>
+                  <a href="product/{{ p.id }}">
+                     <img src="{{ p.image.url }}" alt="{{p.name}}" class="img-thumbnail" />
+                  </a>
+               </div>
+
+            {% if index == 4 %}
+               </div>
+            {% endif %}
+         {% endfor %}
+    </div>
 {%  endblock %}
