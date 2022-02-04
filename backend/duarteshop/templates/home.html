@@ -10,6 +10,10 @@
 
    <div class="container">
       {% for p in products %}
+            <!-- 
+               Keep track of index to be able to know when to create a new row. 
+               Also use of silent to prevent the print of the index on the html page.
+            -->
             {% cycle 1 2 3 4 as index silent%}
             {% if index == 1 %}
                 <div class="row g-3">
