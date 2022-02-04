@@ -12,19 +12,32 @@
       {% for p in products %}
             {% cycle 1 2 3 4 as index silent%}
             {% if index == 1 %}
-                <div class="row">
+                <div class="row g-3">
             {% endif %}
 
-               <div class="col">
-                  <h5>{{p.name}}</h5>
-                  <p>{{p.description}} - {{p.price}} €</p>
-                  <a href="product/{{ p.id }}">
-                     <img src="{{ p.image.url }}" alt="{{p.name}}" class="img-thumbnail" />
-                  </a>
+               <div class="col-3">
+
+                  <div class="card">
+                     {% if p.isOnSale %}
+                        <span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-danger">ON SALE</span>
+                     {% endif %}
+                     <img src="{{ p.image.url }}" alt="{{p.name}}" class="card-img-top" height="200" width="200">
+                     <div class="card-body">
+                        <h5 class="card-title">{{p.name}}</h5>
+                        <p class="card-text">{{p.price}} €</p>
+                        <a href="/product/{{ p.id }}" class="card-link">View</a>
+                        <a href="/addbasket/{{ p.id }}" class="card-link">Add To Basket</a>
+                        <!-- <a href="/product/{{ p.id }}" class="btn btn-primary">View</a>
+                        <a href="/basket/{{ p.id }}" class="btn btn-primary">Add To Basket</a> -->
+                     </div>
+                  </div>
+                  
                </div>
 
             {% if index == 4 %}
                </div>
+               <!-- Needs a br tag to separate rows -->
+               <br>
             {% endif %}
          {% endfor %}
     </div>
