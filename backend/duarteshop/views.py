@@ -84,3 +84,16 @@ def show_basket(request):
         else:
             return render(request, 'basket.html', {'empty': True})
 
+@login_required
+def remove_basket_item(request, sbi):
+    basketItem = BasketItem.objects.get(id=sbi)
+    if basketItem is None:
+        return redirect('/basket')
+    else:
+        if basketItem.quantity > 1:
+            basketItem.quantity = basketItem.quantity - 1
+            basketItem.save()
+        else:
+            basketItem.delete()
+    
+    return redirect('/basket')

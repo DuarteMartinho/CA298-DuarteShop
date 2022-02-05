@@ -9,6 +9,7 @@
         <table class="table table-hover">
             <thead>
                 <tr>
+                    <td></td>
                     <td>Picture</td>
                     <td>Name</td>
                     <td>Description</td>
@@ -20,6 +21,7 @@
                 <tbody>
                     {% for item in sbi %}
                     <tr>
+                        <td><a href="/removeBasketItem/{{item.id}}">Remove</a></td>
                         <td><img src="{{item.productId.image.url}}" alt="" width="150"></td>
                         <td>{{item.productId.name}}</td>
                         <td>{{item.productId.description}}</td>
@@ -29,8 +31,10 @@
                     </tr>
                     {% endfor %}
                 </tbody>
-                <tfoot>
+                <!-- Need to implement total value -->
+                <!-- <tfoot>
                     <tr>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -38,7 +42,7 @@
                         <td></td>
                         <td>0.00€</td>
                     </tr>
-                </tfoot>
+                </tfoot> -->
         </table>
     {% endif %}
 {%  endblock %}
