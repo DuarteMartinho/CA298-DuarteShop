@@ -32,14 +32,14 @@ class Order(models.Model):
     id = models.IntegerField(primary_key=True)
     basketId = models.ForeignKey(Basket, on_delete=models.CASCADE)
     user_id = models.ForeignKey(APIUser, on_delete=models.CASCADE)
-    addressline1 = models.CharField(max_length=100)
-    addressline2 = models.CharField(max_length=100)
-    city = models.CharField(max_length=40)
+    addressline1 = models.CharField(max_length=100, default = '')
+    addressline2 = models.CharField(max_length=100, default = '')
+    city = models.CharField(max_length=40, default = '')
     
     #TODO: Implement a choices options for the counties
-    county = models.CharField(max_length=15) 
+    county = models.CharField(max_length=15, default = '') 
 
     country = models.CharField(max_length=7, default='IRELAND', editable=False)
-    eircode = models.CharField(max_length=7)
+    eircode = models.CharField(max_length=7, default = '')
     datetimeOrder = models.DateTimeField(auto_now_add=True)
     total_price = models.DecimalField(max_digits=6, decimal_places=2, default=0.0)

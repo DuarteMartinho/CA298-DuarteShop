@@ -25,6 +25,9 @@ class UserLoginForm(AuthenticationForm):
 class OrderForm(ModelForm):
     class Meta:
         model=Order
-        fields = ['addressline1', 'addressline2']
+        fields = ['addressline1', 'addressline2', 'city', 'county', 'eircode']
     addressline1 = forms.CharField(label='Address Line 1', max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Address Line 1'}))
     addressline2 = forms.CharField(label='Address Line 2', max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Address Line 2'}))
+    city = forms.CharField(label='City', max_length=40, widget=forms.TextInput(attrs={'placeholder': 'City'}))
+    county = forms.CharField(label='County', max_length=15, widget=forms.TextInput(attrs={'placeholder': 'County'}))
+    eircode = forms.CharField(label='Eircode', max_length=7, widget=forms.TextInput(attrs={'placeholder': 'Eircode'}))

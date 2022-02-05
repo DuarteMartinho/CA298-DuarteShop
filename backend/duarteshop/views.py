@@ -80,7 +80,10 @@ def show_basket(request):
         # is this empty ? 
         if sbi.exists():
             # normal flow
-            return render(request, 'basket.html', {'basket': basket, 'sbi': sbi})
+            total = 0.0
+            for item in sbi:
+                    total += float(item.price())
+            return render(request, 'basket.html', {'basket': basket, 'sbi': sbi, 'total_price': total})
         else:
             return render(request, 'basket.html', {'empty': True})
 
@@ -126,10 +129,16 @@ def order(request):
             order.save()
             basket.is_active = False
             basket.save()
-            return render(request, 'ordercomplete.html', {'order': order, 'basket': basket, 'sbi': sbi})
+            return render(request, 'ordercomplete.html', {'order': order, 'basket': basket, 'sbi': sbi, 'total_price': total})
         else:
-            return render(request, 'orderform.html', {'form': form, 'basket': basket, 'sbi': sbi})
+            total = 0.0
+            for item in sbi:
+                    total += float(item.price())
+            return render(request, 'orderform.html', {'form': form, 'basket': basket, 'sbi': sbi, 'total_price': total})
     else:
         # SHOW FORM
         form = OrderForm()
-        return render(request, 'orderform.html', {'form': form, 'basket': basket, 'sbi': sbi})
+        total = 0.0
+        for item in sbi:
+                total += float(item.price())
+        return render(request, 'orderform.html', {'form': form, 'basket': basket, 'sbi': sbi, 'total_price': total})
