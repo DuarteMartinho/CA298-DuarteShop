@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django import forms
 from django.forms import ModelForm, ModelChoiceField
-from .models import APIUser
+from .models import APIUser, Order
 from django.db import transaction
 
 class UserSignupForm(UserCreationForm):
@@ -20,3 +20,11 @@ class UserLoginForm(AuthenticationForm):
         super(UserLoginForm, self).__init__(*args, **kwargs)
     username = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Your username'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Your password'}))
+
+
+class OrderForm(ModelForm):
+    class Meta:
+        model=Order
+        fields = ['addressline1', 'addressline2']
+    addressline1 = forms.CharField(label='Address Line 1', max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Address Line 1'}))
+    addressline2 = forms.CharField(label='Address Line 2', max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Address Line 2'}))

@@ -3,46 +3,6 @@
 {% block title %}Basket{%  endblock %}
 
 {%  block content %}
-    {% if empty %}
-        <h2>Your Shopping basket is empty.</h2>
-    {% else %}
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <td></td>
-                    <td>Picture</td>
-                    <td>Name</td>
-                    <td>Description</td>
-                    <td>Price</td>
-                    <td>Quantity</td>
-                    <td>Total</td>
-                </tr>
-            </thead>
-                <tbody>
-                    {% for item in sbi %}
-                    <tr>
-                        <td><a href="/removeBasketItem/{{item.id}}">Remove</a></td>
-                        <td><img src="{{item.productId.image.url}}" alt="" width="150"></td>
-                        <td>{{item.productId.name}}</td>
-                        <td>{{item.productId.description}}</td>
-                        <td>{{item.productId.price}}€</td>
-                        <td>{{item.quantity}}x</td>
-                        <td>{{item.price}}€</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-                <!-- Need to implement total value -->
-                <!-- <tfoot>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>0.00€</td>
-                    </tr>
-                </tfoot> -->
-        </table>
-    {% endif %}
+    {%  include "base_basket.html" %}
+    <a href="/order/">Place Order</a>
 {%  endblock %}

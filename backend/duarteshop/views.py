@@ -97,3 +97,39 @@ def remove_basket_item(request, sbi):
             basketItem.delete()
     
     return redirect('/basket')
+
+@login_required
+def order(request):
+    # load all the data we neeed user, basket, items
+    user = request.user
+    basket = Basket.objects.filter(user_id=user, is_active=True).first()
+    
+    # check data is ok
+    if basket is None:
+        return redirect('/')
+    sbi = BasketItem.objects.filter(basketId=basket)
+    if not sbi.exists():
+        return redirect('/')
+    
+    # POST or GET
+    if request.method == 'POST':
+        # Check form is valid
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            order = form.save(commit=False)
+            order.user_id = user
+            order.basketId = basket
+            total = 0.0
+            for item in sbi:
+                total += float(item.price())
+            order.total_price = total
+            order.save()
+            basket.is_active = False
+            basket.save()
+            return render(request, 'ordercomplete.html', {'order': order, 'basket': basket, 'sbi': sbi})
+        else:
+            return render(request, 'orderform.html', {'form': form, 'basket': basket, 'sbi': sbi})
+    else:
+        # SHOW FORM
+        form = OrderForm()
+        return render(request, 'orderform.html', {'form': form, 'basket': basket, 'sbi': sbi})
