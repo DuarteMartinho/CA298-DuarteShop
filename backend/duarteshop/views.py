@@ -159,5 +159,12 @@ def previous_orders(request):
     return render(request, 'previous_orders.html', {'orders': orders})
 
 @login_required
-def view_prev_order(request):
-    pass
+def view_prev_order(request, orderId):
+    user = request.user
+    order = Order.objects.filter(user_id = user, id=orderId).first()
+    # basket = Basket.objects.filter(user_id = user, basket= order.basketId).first()
+    sbi = BasketItem.objects.filter(basketId=order.basketId)
+    total = 0.0
+    for item in sbi:
+        total += float(item.price())
+    return render(request, 'view_order.html', {'order': order, 'sbi': sbi, 'total_price': total})

@@ -1,0 +1,73 @@
+{%  extends "base.html" %}
+
+{% block title %}Order {{order.id}}{%  endblock %}
+
+{%  block content %}
+    <div class="justify-content-center text-center">
+        <h2>Your Order #{{order.id}}</h2>
+    </div>
+    <div class="row justify-content-evenly top-0 start-50">
+        <div class="container card text-start col-4">
+            <h4>Order information:</h4>
+            <p>
+                Order ID: {{order.id}}
+                <br>
+                Order placed at: {{order.datetimeOrder}}
+                <br>
+                Total: {{order.total_price}} €
+            </p>
+        </div>
+        <div class="container card text-start col-4">
+            <h4>Shipping information:</h4>
+            <p>
+                {{order.addressline1}} <br>
+                {{order.addressline2}} <br>
+                {{order.city}} <br>
+                {{order.county}} <br>
+                {{order.country}} <br>
+                {{order.eircode}}
+            </p>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-10">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <td>Picture</td>
+                        <td>Name</td>
+                        <td>Description</td>
+                        <td>Price</td>
+                        <td>Quantity</td>
+                        <td>Total</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in sbi %}
+                    <tr>
+                        <td><img src="{{item.productId.image.url}}" alt="" width="150"></td>
+                        <td>{{item.productId.name}}</td>
+                        <td>{{item.productId.description}}</td>
+                        <td>{{item.productId.price}}€</td>
+                        <td>{{item.quantity}}x</td>
+                        <td>{{item.price}}€</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <!-- <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>{{total_price}}€</td>
+                    </tr>
+                </tfoot> -->
+            </table>
+        </div>
+    </div>
+    <div class="justify-content-center text-center">
+        <a href="/orderhistory/">Go Back</a>
+    </div>
+{%  endblock %}
