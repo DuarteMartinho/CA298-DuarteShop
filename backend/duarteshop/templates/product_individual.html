@@ -4,17 +4,20 @@
 
 {%  block content %}
     {% if added %}
-    <center>
+    <div class="justify-content-center text-center">
         <h2>Added To Basket</h2>
-    </center>
-    <br>
+    </div>
+    
     {% endif %}
-    <h5>{{product.name}}</h5>
-    <p>Description: {{product.description}}</p> 
-    <p>Price: {{product.price}} €</p>
-    <img src="{{ product.image.url }}" alt="{{p.name}}" height="100" width="100" />
-    <br>
-    <a href="/addbasket/{{product.id}}" class="btn btn-primary">Add To Basket €{{product.price}}</a>
-
-
+    <div class="row">
+        <div class="container col-5 md-3">
+            <img src="{{ product.image.url }}" alt="{{p.name}}" height="500px" width="500px" />
+        </div>
+        <div class="container col-6 md-3">
+            <h3>{{product.name}}</h3>
+            <p>Description: {{product.description}}</p>
+            <p>Price: {{product.price}} €</p>
+            <a href="/addbasket/{{product.id}}" class="btn btn-primary">Add To Basket</a>
+        </div>
+    </div>
 {%  endblock %}
