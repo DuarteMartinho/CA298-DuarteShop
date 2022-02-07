@@ -1,0 +1,33 @@
+{%  extends "base.html" %}
+
+{% block title %}Your Orders{%  endblock %}
+
+{%  block content %}
+    <center>
+        <h2>Your Orders</h2>
+    </center>
+    <div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <td>Order ID</td>
+                    <td>Ordered On</td>
+                    <td>Shipping Address</td>
+                    <td>Total</td>
+                    <td></td>
+                </tr>
+            </thead>
+                <tbody>
+                    {% for od in orders %}
+                    <tr>
+                        <td>{{od.id}}</td>
+                        <td>{{od.datetimeOrder}}</td>
+                        <td>{{od.addressline1}}, {{od.addressline2}} <br> {{od.city}}, {{od.county}}, {{od.country}} {{od.eircode}}</td>
+                        <td>{{od.total_price}}€</td>
+                        <td><a href="/prevorder/{{od.id}}">View</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+        </table>
+    </div>
+{%  endblock %}

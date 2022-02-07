@@ -30,8 +30,8 @@
                     {% if user.is_superuser %}
                       <li><a class="dropdown-item" href="/admin/">Admin</a></li>
                     {% endif %}
+                    <li><a class="dropdown-item" href="/orderhistory/">My Orders</a></li>
                     <!-- /user/{{user.id}} -->
-                    <li><a class="dropdown-item" href="#">My Profile</a></li>
                   {% else %}
                     <li><a class="dropdown-item" href="/login/">Login</a></li>
                     <li><a class="dropdown-item" href="/register/">Register</a></li>

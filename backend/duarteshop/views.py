@@ -152,3 +152,12 @@ def success(request):
         total += float(item.price())
     return render(request, 'ordercomplete.html', {'order': testOrder, 'basket': basket, 'sbi': sbi, 'total_price': 0.0})
 
+@login_required
+def previous_orders(request):
+    user = request.user
+    orders = Order.objects.filter(user_id = user).order_by('id').reverse()
+    return render(request, 'previous_orders.html', {'orders': orders})
+
+@login_required
+def view_prev_order(request):
+    pass
