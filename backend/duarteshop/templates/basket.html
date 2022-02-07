@@ -4,5 +4,12 @@
 
 {%  block content %}
     {%  include "base_basket.html" %}
-    <a href="/order/">Order</a>
+    <div class="justify-content-center text-center">
+        {% if empty %}
+            <a class="btn btn-primary" href="/">Home</a>
+        {% else %}
+            <a class="btn btn-primary" href="/order/">Order</a>
+        
+        {% endif %}
+    </div>
 {%  endblock %}

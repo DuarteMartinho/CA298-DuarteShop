@@ -4,10 +4,14 @@
 
 {%  block content %}
     {%  include "base_basket.html" %}
+    <div class="container">
+        <form action="." method="POST">
+            <div class="form-group mb-3">
+                {% csrf_token %}
+                {{ form.as_table }}
+            </div>
+            <button type="submit" class="btn btn-primary">Place Order</button>
+        </form>
+    </div>
 
-    <form action="." method="POST">
-        {% csrf_token %}
-        {{ form.as_table }}
-        <button type="submit" class="btn btn-primary">Place Order</button>
-    </form>
 {%  endblock %}

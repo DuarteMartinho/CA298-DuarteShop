@@ -18,8 +18,8 @@ class UserSignupForm(UserCreationForm):
 class UserLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super(UserLoginForm, self).__init__(*args, **kwargs)
-    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Your username'}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Your password'}))
+    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Your username', 'class': 'form-control'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Your password', 'class': 'form-control'}))
 
 
 class OrderForm(ModelForm):
@@ -37,8 +37,8 @@ class OrderForm(ModelForm):
     class Meta:
         model=Order
         fields = ['addressline1', 'addressline2', 'city', 'county', 'eircode']
-    addressline1 = forms.CharField(label='Address Line 1', max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Address Line 1'}))
-    addressline2 = forms.CharField(label='Address Line 2', max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Address Line 2'}))
-    city = forms.CharField(label='City', max_length=40, widget=forms.TextInput(attrs={'placeholder': 'City'}))
-    county = forms.ChoiceField(choices=counties, widget=forms.Select)
-    eircode = forms.CharField(label='Eircode', max_length=7, widget=forms.TextInput(attrs={'placeholder': 'Eircode'}))
+    addressline1 = forms.CharField(label='Address Line 1', max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Address Line 1', 'class': 'form-control'}))
+    addressline2 = forms.CharField(label='Address Line 2', max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Address Line 2', 'class': 'form-control'}))
+    city = forms.CharField(label='City', max_length=40, widget=forms.TextInput(attrs={'placeholder': 'City', 'class': 'form-control'}))
+    county = forms.ChoiceField(choices=counties, widget=forms.Select(attrs={'placeholder': 'County', 'class': 'form-select'}))
+    eircode = forms.CharField(label='Eircode', max_length=7, widget=forms.TextInput(attrs={'placeholder': 'Eircode', 'class': 'form-control'}))
