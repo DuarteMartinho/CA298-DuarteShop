@@ -133,12 +133,22 @@ def order(request):
         else:
             total = 0.0
             for item in sbi:
-                    total += float(item.price())
+                total += float(item.price())
             return render(request, 'orderform.html', {'form': form, 'basket': basket, 'sbi': sbi, 'total_price': total})
     else:
         # SHOW FORM
         form = OrderForm()
         total = 0.0
         for item in sbi:
-                total += float(item.price())
+            total += float(item.price())
         return render(request, 'orderform.html', {'form': form, 'basket': basket, 'sbi': sbi, 'total_price': total})
+
+def success(request):
+    testOrder = Order.objects.filter(id = 6).first()
+    basket = Basket.objects.filter(user_id = testOrder.user_id).first()
+    sbi = BasketItem.objects.filter(basketId=basket)
+    total = 0.0
+    for item in sbi:
+        total += float(item.price())
+    return render(request, 'ordercomplete.html', {'order': testOrder, 'basket': basket, 'sbi': sbi, 'total_price': 0.0})
+

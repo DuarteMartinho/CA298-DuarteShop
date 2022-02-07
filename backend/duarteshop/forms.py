@@ -23,11 +23,22 @@ class UserLoginForm(AuthenticationForm):
 
 
 class OrderForm(ModelForm):
+    counties = [
+        ('Co. Carlow', 'Co. Carlow'), ('Co. Cavan', 'Co. Cavan'), ('Co. Clare', 'Co. Clare'), 
+        ('Co. Cork', 'Co. Cork'), ('Co. Donegal', 'Co. Donegal'), ('Co. Dublin', 'Co. Dublin'), 
+        ('Co. Galway', 'Co. Galway'), ('Co. Kerry', 'Co. Kerry'), ('Co. Kildare', 'Co. Kildare'), 
+        ('Co. Kilkenny', 'Co. Kilkenny'), ('Co. Laois', 'Co. Laois'), ('Co. Leitrim', 'Co. Leitrim'), 
+        ('Co. Limerick', 'Co. Limerick'), ('Co. Longford','Co. Longford'), ('Co. Louth', 'Co. Louth'), 
+        ('Co. Mayo', 'Co. Mayo'), ('Co. Meath', 'Co. Meath'), ('Co. Monaghan', 'Co. Monaghan'), 
+        ('Co. Offaly', 'Co. Offaly'), ('Co. Roscommon', 'Co. Roscommon'), ('Co. Sligo', 'Co. Sligo'),
+        ('Co. Tipperary', 'Co. Tipperary'), ('Co. Waterford', 'Co. Waterford'), ('Co. Westmeath', 'Co. Westmeath'),
+        ('Co. Wexford', 'Co. Wexford'), ('Co. Wicklow', 'Co. Wicklow')
+    ]
     class Meta:
         model=Order
         fields = ['addressline1', 'addressline2', 'city', 'county', 'eircode']
     addressline1 = forms.CharField(label='Address Line 1', max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Address Line 1'}))
     addressline2 = forms.CharField(label='Address Line 2', max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Address Line 2'}))
     city = forms.CharField(label='City', max_length=40, widget=forms.TextInput(attrs={'placeholder': 'City'}))
-    county = forms.CharField(label='County', max_length=15, widget=forms.TextInput(attrs={'placeholder': 'County'}))
+    county = forms.ChoiceField(choices=counties, widget=forms.Select)
     eircode = forms.CharField(label='Eircode', max_length=7, widget=forms.TextInput(attrs={'placeholder': 'Eircode'}))

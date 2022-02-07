@@ -3,22 +3,37 @@
 {% block title %}New Order{%  endblock %}
 
 {%  block content %}
-    <h1>Thanks for your order!</h1>
-
-    <h4>Order information:</h4>
-    <p>Order placed at: {{order.datetimeOrder}}</p>
-    <p>Items: </p>
-    {% for item in sbi %}
-        <p>{{item.productId.name}} - {{item.quantity}} {{item.price}}</p>
-    {% endfor %}
+    <center>
+        <h1>Thanks for your order!</h1>
+    </center>
+    <center>
+        <div class="row justify-content-evenly">
+            <div class="container card text-start col-4">
+                <h4>Order information:</h4>
+                <p>Order placed at: {{order.datetimeOrder}}</p>
+                <ul><strong>Items:</strong>
+                {% for item in sbi %}
+                    <li>{{item.productId.name}} - {{item.quantity}} {{item.price}}</li>
+                {% endfor %}
+                </ul>
+                <p>Total: {{order.total_price}} €</p>
+            </div>
+            <div class="container card text-start col-4">
+                <h4>Shipping information:</h4>
+                <p>
+                    {{order.addressline1}} <br>
+                    {{order.addressline2}} <br>
+                    {{order.city}} <br>
+                    {{order.county}} <br>
+                    {{order.country}} <br>
+                    {{order.eircode}}
+                </p>
+            </div>
+        </div>
+    </center>
+    
+    
     <br>
-    <p>Total: {{order.total_price}}</p>
     <br>
-    <h4>Shipping information:</h4>
-    <p>{{order.addressline1}}</p>
-    <p>{{order.addressline2}}</p>
-    <p>{{order.city}}</p>
-    <p>{{order.county}}</p>
-    <p>{{order.country}}</p>
-    <p>{{order.eircode}}</p>
+    
 {%  endblock %}

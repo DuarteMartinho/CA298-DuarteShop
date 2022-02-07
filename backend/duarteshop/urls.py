@@ -12,4 +12,5 @@ urlpatterns = [
    path('basket/', views.show_basket, name="show_basket"),
    path('removeBasketItem/<int:sbi>', views.remove_basket_item, name="remove_basket_item"),
    path('order/', views.order, name="order"),
+   path('success/', views.success, name="success"),
 ]
