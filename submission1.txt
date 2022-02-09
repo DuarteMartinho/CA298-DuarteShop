@@ -1,0 +1,7 @@
+---------------------------------------------
+- Duarte Martinho
+- Student ID: 20410974
+---------------------------------------------
+
+Video link of functionality: https://drive.google.com/file/d/1Vdx8nz1Rh1XEEbfQPR4Zvkzvq9jnS0Gu/view?usp=sharing
+Link to my gitlab code: https://gitlab.computing.dcu.ie/martid46/2022-ca298-duarteshop
