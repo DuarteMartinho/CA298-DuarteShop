@@ -1,6 +1,11 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 from .forms import *
+
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register('products', views.ProductViewSet)
 
 urlpatterns = [
    path('', views.home, name="home"),
@@ -15,4 +20,6 @@ urlpatterns = [
    path('success/', views.success, name="success"),
    path('orderhistory/', views.previous_orders, name="order_history"),
    path('prevorder/<int:orderId>', views.view_prev_order, name="view_prev_order"),
+
+   path('api/', include(router.urls)),
 ]

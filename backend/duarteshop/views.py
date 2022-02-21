@@ -3,6 +3,8 @@ from django.views.generic import CreateView
 from django.contrib.auth import login, logout
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
+from rest_framework import viewsets
+from .serializers import *
 from .forms import *
 from .models import *
 
@@ -168,3 +170,7 @@ def view_prev_order(request, orderId):
     for item in sbi:
         total += float(item.price())
     return render(request, 'view_order.html', {'order': order, 'sbi': sbi, 'total_price': total})
+
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
