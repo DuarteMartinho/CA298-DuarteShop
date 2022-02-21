@@ -270,5 +270,5 @@ cython_debug/
 .history
 .ionide
 
-# ignore all .DS_Store
+# Ignore mac files
 .DS_Store
