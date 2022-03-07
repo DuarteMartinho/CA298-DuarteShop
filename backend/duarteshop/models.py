@@ -36,7 +36,6 @@ class Order(models.Model):
     addressline2 = models.CharField(max_length=100, default = '')
     city = models.CharField(max_length=40, default = '')
     
-    #TODO: Implement a choices options for the counties
     county = models.CharField(max_length=15, default = '') 
 
     country = models.CharField(max_length=7, default='IRELAND', editable=False)

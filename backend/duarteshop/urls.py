@@ -6,6 +6,9 @@ from rest_framework import routers
 
 router = routers.DefaultRouter()
 router.register('products', views.ProductViewSet)
+router.register('basket', views.BasketViewSet)
+router.register('order', views.OrderViewSet)
+router.register('users', views.APIUserViewSet)
 
 urlpatterns = [
    path('', views.home, name="home"),
@@ -22,4 +25,9 @@ urlpatterns = [
    path('prevorder/<int:orderId>', views.view_prev_order, name="view_prev_order"),
 
    path('api/', include(router.urls)),
+   path('apiregister/', views.UserRegistrationAPIView.as_view(), name="api_register"),
+   path('apiadd/', views.AddBasketItemAPIView.as_view(), name="api_add_to_basket"),
+   path('apiremove/', views.RemoveBasketItemAPIView.as_view(), name="api_remove_from_basket"),
+	path('apicheckout/', views.CheckoutAPIView.as_view(), name="api_checkout"),
+
 ]
