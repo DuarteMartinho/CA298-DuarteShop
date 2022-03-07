@@ -1,0 +1,61 @@
+<html>
+    <head>
+			<title>Login Page</title>
+      <link rel='stylesheet' href='/stylesheets/style.css' />
+    </head>
+    <body>
+        <h1>Login</h1>
+        <form id="login-form">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" placeholder="Your username" required>
+            <br>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Your password" required>
+            <br>
+            <button type="submit">Login</button>
+            <p id="login-error" class="login-error"></p>
+        </form>
+				<script>
+					// your script goes here
+
+          function formSubmit(event) {
+            event.preventDefault();
+            uname = document.getElementById("username");
+            pass = document.getElementById("password");
+            error = document.getElementById("login-error");
+            if (uname.value === "") {
+              error.innerHTML = "Username is not valid";
+            } else if (pass.value === "") {
+              error.innerHTML = "Password is not valid";
+            } else {
+              fetch("http://localhost:1111/api/token/", {
+                method: 'POST',
+                headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({username: uname.value, password: pass.value})
+              }).then(response=>response.json())
+              .then(data => {
+                console.log(data)
+                if('access' in data){
+                  let accessToken = data['access'];
+                  let refreshToken = data['refresh'];
+                  localStorage.setItem("access", accessToken);
+                  localStorage.setItem("refresh", refreshToken);
+                  window.location.href = "/";
+                }
+                else{
+                  error.innerHTML = "Username or Password incorrect.";
+                }
+              });
+            }
+          }
+          
+          const login = document.getElementById('login-form');
+          login.addEventListener('submit', formSubmit);
+          
+					
+				</script>
+    </body>
+</html>

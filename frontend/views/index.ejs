@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <script>
+      let req = "http://localhost:1111/api/products/"
+      listContainer = document.createElement('div'),
+      document.getElementsByTagName('body')[0].appendChild(listContainer);
+      fetch(req) // make a request to this endpoint
+				.then(response => response.json()) // with our response, get the json data returned
+				.then((data) => {
+          
+          console.log(data);
+          for (let i = 0; i < data.length; i++) {
+            listItem = document.createElement('div');
+            listImg = document.createElement('img');
+            listItem.innerHTML = data[i].name + ' ' + data[i].price + '<br>';
+            listImg.src = data[i].image;
+            listImg.alt = data[i].name;
+            listImg.height = 300;
+            listImg.width = 300;
+            listItem.appendChild(listImg);
+            listContainer.appendChild(listItem);
+          }
+        
+        }); // print the json data
+    </script>
+  </body>
+</html>
