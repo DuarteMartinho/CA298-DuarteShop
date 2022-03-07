@@ -272,3 +272,6 @@ cython_debug/
 
 # Ignore mac files
 .DS_Store
+
+# Ignore node_modules
+node_modules
