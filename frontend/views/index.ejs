@@ -1,26 +1,21 @@
 <%- include('header') -%>
 
-<h1><%= title %></h1>
-<p>Welcome to <%= title %></p>
-<a id='auth-link' href="/login">Login</a>
 <div id="main-content">
 
 </div>
 <script>
   let req = "http://localhost:1111/api/products/"
-    let container = document.getElementById('main-content');
     fetch(req) // make a request to this endpoint
       .then(response => response.json()) // with our response, get the json data returned
       .then((data) => {
-        
         console.log(data);
         for (let i = 0; i < data.length; i++) {
           let listItem = document.createElement('div');
-    let link = document.createElement('a');
+          let link = document.createElement('a');
           let listImg = document.createElement('img');
-    link.innerHTML = data[i].name;
-    let productStr = "/product?id=" + data[i].id;
-    link.href = productStr;
+          link.innerHTML = data[i].name;
+          let productStr = "/product?id=" + data[i].id;
+          link.href = productStr;
           listItem.innerHTML = data[i].name + ' ' + data[i].price + '<br>';
           listImg.src = data[i].image;
           listImg.alt = data[i].name;
@@ -28,25 +23,10 @@
           listImg.width = 300;
           listItem.appendChild(listImg);
           listItem.appendChild(link);
-          container.appendChild(listItem);
+          document.getElementById("main-content").appendChild(listItem);
         }
       
       }); // print the json data
-    window.userLoggedIn = false;
-
-    (() => { 
-      console.log('log in function');
-      let accessToken = localStorage.getItem('accessToken');
-      if (accessToken != null || typeof(accessToken) != 'undefined') {
-        window.userLoggedIn = true;
-      }
-    })();
-
-    if (window.userLoggedIn) {
-      let auth = document.getElementById('auth-link');
-      auth.href = '/logout';
-      auth.innerHTML = 'Logout'
-    }
   </script>
 
 <%- include('footer') -%>

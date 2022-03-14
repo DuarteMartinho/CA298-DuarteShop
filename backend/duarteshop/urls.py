@@ -29,5 +29,4 @@ urlpatterns = [
    path('apiadd/', views.AddBasketItemAPIView.as_view(), name="api_add_to_basket"),
    path('apiremove/', views.RemoveBasketItemAPIView.as_view(), name="api_remove_from_basket"),
 	path('apicheckout/', views.CheckoutAPIView.as_view(), name="api_checkout"),
-
 ]
