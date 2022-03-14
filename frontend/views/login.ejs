@@ -41,8 +41,8 @@
                 if('access' in data){
                   let accessToken = data['access'];
                   let refreshToken = data['refresh'];
-                  localStorage.setItem("access", accessToken);
-                  localStorage.setItem("refresh", refreshToken);
+                  localStorage.setItem("accessToken", accessToken);
+                  localStorage.setItem("refreshToken", refreshToken);
                   window.location.href = "/";
                 }
                 else{
