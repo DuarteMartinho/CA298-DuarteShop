@@ -1,0 +1,76 @@
+<%- include('header') -%>
+
+<h1>Register</h1>
+<form id="register-form">
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" placeholder="Your email" required>
+    <br>
+    <label for="username">Username</label>
+    <input type="text" name="username" id="username" placeholder="Your username" required>
+    <br>
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" placeholder="Your password" required>
+    <br>
+    <button type="submit">Register</button>
+    <p id="register-error" class="register-error"></p>
+</form>
+<p>Already have an account ? <a href="/login">LOGIN</a></p>
+
+<script>
+  // your script goes here
+
+  function formSubmit(event) {
+    event.preventDefault();
+    email = document.getElementById("email");
+    uname = document.getElementById("username");
+    pass = document.getElementById("password");
+    error = document.getElementById("register-error");
+    if (uname.value === "") {
+      error.innerHTML = "Username is not valid";
+    } else if (pass.value === "") {
+      error.innerHTML = "Password is not valid";
+    } else if (email.value === "") {
+      error.innerHTML = "Email is not valid";
+    } else {
+      fetch("http://localhost:1111/apiregister/", {
+        method: 'POST',
+        headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({email: email.value, username: uname.value, password: pass.value})
+      }).then(response=>response.json())
+      .then(data => {
+        console.log(data)
+        if (data['username'] == uname.value) {
+          fetch("http://localhost:1111/api/token/", {
+            method: 'POST',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({username: uname.value, password: pass.value})
+          }).then(response=>response.json())
+          .then(data => {
+            console.log(data)
+            if('access' in data){
+              let accessToken = data['access'];
+              let refreshToken = data['refresh'];
+              localStorage.setItem("accessToken", accessToken);
+              localStorage.setItem("refreshToken", refreshToken);
+              window.location.href = "/";
+            }
+          });
+        } else {
+          error.innerHTML = "Register failed";
+        }
+      });
+    }
+  }
+  
+  const login = document.getElementById('register-form');
+  login.addEventListener('submit', formSubmit);
+  
+  
+</script>
+<%- include('footer') -%>

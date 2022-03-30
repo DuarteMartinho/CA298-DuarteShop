@@ -28,5 +28,6 @@ urlpatterns = [
    path('apiregister/', views.UserRegistrationAPIView.as_view(), name="api_register"),
    path('apiadd/', views.AddBasketItemAPIView.as_view(), name="api_add_to_basket"),
    path('apiremove/', views.RemoveBasketItemAPIView.as_view(), name="api_remove_from_basket"),
+   path('apilogout/', views.logout_user, name="api_logout"),
 	path('apicheckout/', views.CheckoutAPIView.as_view(), name="api_checkout"),
 ]

@@ -11,6 +11,10 @@ router.get('/login', function(req, res, next) {
   res.render('login');
 });
 
+router.get('/register', function(req, res, next) {
+  res.render('register');
+});
+
 // product?id=1
 router.get('/product', function(req, res, next) {
   res.render('product');

@@ -4,14 +4,15 @@
 
         function isLoggedIn(){
             let accessToken = localStorage.getItem("accessToken");
-            if(accessToken != null || typeof(accessToken)!='undefined'){
+            console.log(typeof(accessToken));
+            if(accessToken != null){
                 // if there is an access token in localstorage
                 window.userLoggedIn = true;
             }
             if(window.userLoggedIn){
                 let loginLink = document.getElementById("auth-link");
                 loginLink.innerHTML = "Logout";
-                loginLink.href = "#";
+                loginLink.href = "/logout";
             }
             
         }
@@ -19,6 +20,19 @@
     window.onload = function(){
         isLoggedIn(); // when the page loads call isLoggedIn
     }
+
+    document.getElementById("auth-link").addEventListener("click", function(event) {
+        event.preventDefault();
+        if (window.userLoggedIn) {
+          // if user is logged in, log them out
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("refreshToken");
+          window.location.href = "/";
+        } else {
+          // if user is not logged in, log them in
+          window.location.href = "/login";
+        }
+      });
     </script>
 </body>
 </html>
