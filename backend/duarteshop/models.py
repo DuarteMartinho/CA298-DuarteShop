@@ -27,6 +27,24 @@ class BasketItem(models.Model):
 
     def price(self):
         return self.productId.price * self.quantity
+    
+    def product_name(self):
+        return f"{self.productId.name}"
+
+    def product_desc(self):
+        return f"{self.productId.description}"
+
+    def product_img(self):
+        return f"{self.productId.image}"
+
+    def product_price(self):
+        return self.productId.price
+
+    def product_isOnSale(self):
+        return self.productId.isOnSale
+
+    def product_isInStock(self):
+        return self.productId.isInStock
 
 class Order(models.Model):
     id = models.IntegerField(primary_key=True)

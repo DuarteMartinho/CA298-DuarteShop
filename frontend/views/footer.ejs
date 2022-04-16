@@ -1,21 +1,23 @@
-	<!-- footer code -->
-    <script>
-        window.userLoggedIn = false;
+<script>
+    window.userLoggedIn = false;
 
-        function isLoggedIn(){
-            let accessToken = localStorage.getItem("accessToken");
-            console.log(typeof(accessToken));
-            if(accessToken != null){
-                // if there is an access token in localstorage
-                window.userLoggedIn = true;
-            }
-            if(window.userLoggedIn){
-                let loginLink = document.getElementById("auth-link");
-                loginLink.innerHTML = "Logout";
-                loginLink.href = "/logout";
-            }
-            
+    function isLoggedIn(){
+        let accessToken = localStorage.getItem("accessToken");
+        if(accessToken != null){
+            // if there is an access token in localstorage
+            window.userLoggedIn = true;
         }
+        if (window.userLoggedIn) {
+            let loginLink = document.getElementById("auth-link");
+            loginLink.innerHTML = "Logout";
+            loginLink.href = "/logout";
+        } else {
+            let loginLink = document.getElementById("auth-link");
+            loginLink.innerHTML = "Login / Register";
+            loginLink.href = "/login";
+        }
+        
+    }
 
     window.onload = function(){
         isLoggedIn(); // when the page loads call isLoggedIn
@@ -35,4 +37,7 @@
       });
     </script>
 </body>
+<footer>
+	<!-- footer code -->
+</footer>
 </html>

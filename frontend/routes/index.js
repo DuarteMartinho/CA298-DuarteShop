@@ -20,4 +20,8 @@ router.get('/product', function(req, res, next) {
   res.render('product');
 });
 
+router.get('/basket', function(req, res, next) {
+  res.render('basket');
+});
+
 module.exports = router;

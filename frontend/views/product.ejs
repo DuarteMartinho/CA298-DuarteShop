@@ -31,7 +31,7 @@
           let addbtn = document.getElementById('add-cart');
 
           addbtn.onclick = ()=>{
-            // code for when the button is clicked
+            console.log(prodId);
             fetch('http://localhost:1111/apiadd/', {
               method: 'POST',
               headers: {

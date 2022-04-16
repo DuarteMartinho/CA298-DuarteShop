@@ -1,0 +1,15 @@
+<%- include('header') -%>
+
+<div id="main-content">
+
+</div>
+<script type="text/javascript" src="/javascripts/basket.js"></script>
+<script>
+  if (localStorage.getItem("accessToken") == null) {
+    window.location.href = "/login";
+  } else {
+    createBasket();
+  }
+</script>
+
+<%- include('footer') -%>
