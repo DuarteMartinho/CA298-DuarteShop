@@ -24,4 +24,12 @@ router.get('/basket', function(req, res, next) {
   res.render('basket');
 });
 
+router.get('/order', function(req, res, next) {
+  res.render('order');
+});
+
+router.get('/ordersuccess', function(req, res, next) {
+  res.render('order_success');
+});
+
 module.exports = router;

@@ -48,6 +48,7 @@ class BasketItem(models.Model):
 
 class Order(models.Model):
     id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=100, default="")
     basketId = models.ForeignKey(Basket, on_delete=models.CASCADE)
     user_id = models.ForeignKey(APIUser, on_delete=models.CASCADE)
     addressline1 = models.CharField(max_length=100, default = '')

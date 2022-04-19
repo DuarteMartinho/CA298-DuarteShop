@@ -1,0 +1,50 @@
+<%- include('header') -%>
+
+<div>
+    <h1>Thanks for your order!</h1>
+    <p>Your order has been placed successfully!</p>
+    <p id="order-id-text">Your order number is: <span id="order-id"></span></p>
+</div>
+
+<div id="order-content">
+    <h2>Order details</h2>
+    <p>Order placed at: <span id="order-time"></span> </p>
+    <p>Order total: <span id="order-total"></span>€</p>
+    <table id="order-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody id="order-table-body">
+        </tbody>
+    </table>
+</div>
+<div id="shipping-content">
+    <h2>Shipping details</h2>
+    <p>Name: <span id="shipping-name"></span></p>
+    <p><span id="shipping-address"></span></p>
+    <p><span id="shipping-city"></span></p>
+    <p><span id="shipping-county"></span></p>
+    <p><span id="shipping-country"></span></p>
+    <p><span id="shipping-eircode"></span></p>
+</div>
+
+<script type="text/javascript" src="/javascripts/orders_success.js"></script>
+<script>
+    let params = window.location.search;
+    let urlParams = new URLSearchParams(params);
+    let orderId = urlParams.get('id');
+    if (localStorage.getItem("accessToken") == null) {
+        window.location.href = "/login";
+    } else if (orderId != null || typeof(orderId) != 'undefined') {
+        getInfo(orderId);
+    } else {
+        getInfo(null);
+    }
+</script>
+
+<%- include('footer') -%>

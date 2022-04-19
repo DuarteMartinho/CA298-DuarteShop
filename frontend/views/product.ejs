@@ -9,54 +9,16 @@
   <button id="add-cart">Add to Cart</button>
 </div>
 
-
+<script type="text/javascript" src="/javascripts/products.js"></script>
 <script>
-  // your script goes here  
   let params = window.location.search;
   let urlParams = new URLSearchParams(params);
   let prodId = urlParams.get('id');
-  let req = "http://localhost:1111/api/products/" + prodId;
   if (prodId != null || typeof(prodId) != 'undefined') {
-    fetch(req) // make a request to this endpoint
-      .then(response => response.json()) // with our response, get the json data returned
-      .then((data) => {
-        if ('detail' in data) { 
-          console.log('NOT FOUND');
-        } else {
-          console.log(data);
-          let img = document.getElementById('img');
-          let title = document.getElementById('title');
-          let desc = document.getElementById('desc');
-          let price = document.getElementById('price');
-          let addbtn = document.getElementById('add-cart');
-
-          addbtn.onclick = ()=>{
-            console.log(prodId);
-            fetch('http://localhost:1111/apiadd/', {
-              method: 'POST',
-              headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer '+ localStorage.getItem("accessToken")
-              },
-              body: JSON.stringify({
-                "productId": parseInt(prodId)
-              })
-            })
-            .then(response=>response.json())
-            .then(data=>{
-                // display an add to cart success message
-                console.log(data)
-              });
-            }
-          img.src = data.image;
-          title.innerHTML = data.name;
-          desc.innerHTML = data.description;
-          price.innerHTML = data.price;
-        }
-      }
-    ); // print the json data
-  } 
+    getProduct(prodId);
+  } else {
+    window.location.href = "/";
+  }
 
   
 </script>

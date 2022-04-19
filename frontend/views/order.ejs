@@ -1,0 +1,72 @@
+<%- include('header') -%>
+
+<div id="basket-content"></div>
+
+<div id="order-content">
+    <form id="order-submit">
+        <div class="form-group">
+            <label for="address">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Name" required>
+        </div>
+        <div class="form-group">
+            <label for="address">Address Line 1</label>
+            <input type="text" class="form-control" id="address1" placeholder="Address Line 1" required>
+        </div>
+        <div class="form-group">
+            <label for="address">Address Line 2</label>
+            <input type="text" class="form-control" id="address2" placeholder="Address Line 2" required>
+        </div>
+        <div class="form-group">
+            <label for="address">City</label>
+            <input type="text" class="form-control" id="city" placeholder="City" required>
+        </div>
+        <div class="form-group">
+            <label for="address">County</label>
+            <select class="form-control" id="county" required>
+                <option value="Select County">Select County</option>
+                <option value="Co. Carlow">Co. Carlow</option>
+                <option value="Co. Cavan">Co. Cavan</option>
+                <option value="Co. Clare">Co. Clare</option>
+                <option value="Co. Cork">Co. Cork</option>
+                <option value="Co. Donegal">Co. Donegal</option>
+                <option value="Co. Dublin">Co. Dublin</option>
+                <option value="Co. Galway">Co. Galway</option>
+                <option value="Co. Kerry">Co. Kerry</option>
+                <option value="Co. Kildare">Co. Kildare</option>
+                <option value="Co. Kilkenny">Co. Kilkenny</option>
+                <option value="Co. Laois">Co. Laois</option>
+                <option value="Co. Leitrim">Co. Leitrim</option>
+                <option value="Co. Limerick">Co. Limerick</option>
+                <option value="Co. Longford">Co. Longford</option>
+                <option value="Co. Louth">Co. Louth</option>
+                <option value="Co. Mayo">Co. Mayo</option>
+                <option value="Co. Meath">Co. Meath</option>
+                <option value="Co. Monaghan">Co. Monaghan</option>
+                <option value="Co. Offaly">Co. Offaly</option>
+                <option value="Co. Roscommon">Co. Roscommon</option>
+                <option value="Co. Sligo">Co. Sligo</option>
+                <option value="Co. Tipperary">Co. Tipperary</option>
+                <option value="Co. Waterford">Co. Waterford</option>
+                <option value="Co. Westmeath">Co. Westmeath</option>
+                <option value="Co. Wexford">Co. Wexford</option>
+                <option value="Co. Wicklow">Co. Wicklow</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="address">Eircode</label>
+            <input type="text" class="form-control" id="eircode" placeholder="Eircode" maxlength="7" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<script type="text/javascript" src="/javascripts/basket.js"></script>
+<script type="text/javascript" src="/javascripts/orders.js"></script>
+<script>
+  if (localStorage.getItem("accessToken") == null) {
+    window.location.href = "/login";
+  } else {
+    createBasket(true);
+  }
+</script>
+
+<%- include('footer') -%>

@@ -1,6 +1,6 @@
 <%- include('header') -%>
 
-<div id="main-content">
+<div id="basket-content">
 
 </div>
 <script type="text/javascript" src="/javascripts/basket.js"></script>
@@ -8,7 +8,7 @@
   if (localStorage.getItem("accessToken") == null) {
     window.location.href = "/login";
   } else {
-    createBasket();
+    createBasket(false);
   }
 </script>
 

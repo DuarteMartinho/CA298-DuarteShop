@@ -21,7 +21,7 @@ function createTableHeader(table) {
     return table;
 }
 
-function createtRow(basketData) {
+function createtRow(basketData, isCheckout) {
     let row = document.createElement("tr");
     let pImg = document.createElement("td");
     let pImgTag = document.createElement("img");
@@ -36,8 +36,10 @@ function createtRow(basketData) {
     pName.innerHTML = basketData.product_name;
     pPrice.innerHTML = basketData.product_price.toFixed(2) + " €";
     pQuantity.innerHTML = basketData.quantity + "x ";
-    pQuantity.appendChild(addBasketBtn(basketData.productId));
-    pQuantity.appendChild(removeBasketBtn(basketData.productId));
+    if (!isCheckout) {
+        pQuantity.appendChild(addBasketBtn(basketData.productId));
+        pQuantity.appendChild(removeBasketBtn(basketData.productId));
+    }
     bTotal.innerHTML = basketData.price.toFixed(2) + " €";
     row.appendChild(pImg);
     row.appendChild(pName);
@@ -65,7 +67,7 @@ function createFooter(basketTotal) {
     return tfoot;
 }
 
-function createBasket() {
+function createBasket(isCheckout) {
     let req = "http://localhost:1111/api/basket/";
     fetch(req, {
         method: 'GET',
@@ -82,24 +84,28 @@ function createBasket() {
         if (currentBasket == null) {
             console.log('No basket found');
             return;
+        } else if (currentBasket.is_active == false) {
+            console.log('No active basket');
+            return;
         }
 
         var totalPrice = 0.0;
 
         let table = document.createElement("table");
+        table.setAttribute("id", "basketTable");
         table = createTableHeader(table);
         let tbody = document.createElement("tbody");
         
         for (let i = 0; i < currentBasket.items.length; i++) {
             let currentItem = currentBasket.items[i];
-            let row = createtRow(currentItem);
+            let row = createtRow(currentItem, isCheckout);
             tbody.appendChild(row);
             totalPrice += currentItem.price;
         }
         table.appendChild(tbody);
         let tfoot = createFooter(totalPrice.toFixed(2));
         table.appendChild(tfoot);
-        document.getElementById("main-content").appendChild(table);
+        document.getElementById("basket-content").appendChild(table);
     });
     
 }
@@ -121,7 +127,9 @@ function addBasketBtn(id) {
               body: JSON.stringify({
                 "productId": this.id
               })
-            })
+            }).then(() => {
+                updateBasket();
+            });
     });
     return btn;
 }
@@ -142,7 +150,57 @@ function removeBasketBtn(id) {
             body: JSON.stringify({
               "productId": this.id
             })
+        }).then(() => {
+            updateBasket();
         });
     });
     return btn;
+}
+
+function updateBasket() {
+    let spinner = document.createElement("h2");
+    spinner.innerHTML = "Updating basket...";
+
+    let req = "http://localhost:1111/api/basket/";
+    fetch(req, {
+        method: 'GET',
+        headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+ localStorage.getItem("accessToken")
+        },
+    }) // make a request to this endpoint
+    .then(response => response.json()) // with our response, get the json data returned
+    .then((basketData) => {
+        console.log(basketData);
+        let currentBasket = basketData[basketData.length - 1];
+        if (currentBasket == null) {
+            console.log('No basket found');
+            return;
+        } else if (currentBasket.is_active == false) {
+            console.log('No active basket');
+            return;
+        }
+
+        var totalPrice = 0.0;
+
+        let table = document.createElement("table");
+        table.setAttribute("id", "basketTable");
+        table = createTableHeader(table);
+        let tbody = document.createElement("tbody");
+        
+        for (let i = 0; i < currentBasket.items.length; i++) {
+            let currentItem = currentBasket.items[i];
+            let row = createtRow(currentItem, false);
+            tbody.appendChild(row);
+            totalPrice += currentItem.price;
+        }
+        table.appendChild(tbody);
+        let tfoot = createFooter(totalPrice.toFixed(2));
+        table.appendChild(tfoot);
+
+        let oldTable = document.getElementById("basketTable");
+        document.getElementById("basket-content").removeChild(oldTable);
+        document.getElementById("basket-content").appendChild(table);
+    });
 }
