@@ -1,8 +1,19 @@
 <%- include('header') -%>
+<section class="section is-small"></section>
 
-<div id="basket-content">
+<section class="level level-item columns">
+  <div class="column"></div>
+  <div class="column is-four-fifths">
+    <div id="basket-content"></div>
+  </div>
+  <div class="column">
+  </div>
+</section>
 
-</div>
+<section class=" level level-item">
+    <a class="button is-primary" href='/order'>Place Order</a>
+</section>
+
 <script type="text/javascript" src="/javascripts/basket.js"></script>
 <script>
   if (localStorage.getItem("accessToken") == null) {

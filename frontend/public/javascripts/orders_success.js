@@ -1,7 +1,5 @@
-
 function getInfo(id) {
-    
-    if (id === null) {
+    if (id === null || id === "") {
         hideOrder();
         return;
     } else {
@@ -13,9 +11,7 @@ function getInfo(id) {
                 'Authorization': 'Bearer '+ localStorage.getItem("accessToken")
             },
         }).then(response => response.json()).then((orderData) => {
-            console.log(orderData);
             if (orderData.detail != null) {
-                console.log('No order found');
                 hideOrder();
                 return;
             }
@@ -28,6 +24,12 @@ function getInfo(id) {
                 },
             }).then(response => response.json()).then((basketData) => {
                 let orderTime = new Date(orderData.datetimeOrder);
+
+                let deliveryDate = new Date();
+                deliveryDate.setDate(orderTime.getDate() + 5);
+
+                let estimatedDelivery = document.getElementById('estimated-delivery');
+                estimatedDelivery.innerHTML = deliveryDate.getDate() + "/" + (deliveryDate.getMonth() + 1) + "/" + deliveryDate.getFullYear();
 
                 let id = document.getElementById('order-id');
                 let time = document.getElementById('order-time');
@@ -49,19 +51,8 @@ function getInfo(id) {
                 country.innerHTML = orderData.country;
                 eircode.innerHTML = orderData.eircode;
 
-                console.log("Order ID: " + orderData.id);
-                console.log("Order total: " + orderData.total_price);
-                console.log("Order date: " + orderData.datetimeOrder);
-                console.log("Order address: " + orderData.addressline1 + " " + orderData.addressline2 + " " + orderData.city + " " + orderData.county + " " + orderData.eircode);
-                console.log("Order products: ");
-
                 let prodTable = document.getElementById('order-table-body');
                 for (let i = 0; i < basketData.items.length; i++) {
-                    console.log("Product ID: " + basketData.items[i].productId);
-                    console.log("Product name: " + basketData.items[i].product_name);
-                    console.log("Product price: " + basketData.items[i].product_price);
-                    console.log("Product quantity: " + basketData.items[i].quantity);
-                    console.log("Total price: " + basketData.items[i].price);
                     let currProd = basketData.items[i];
 
                     let row = document.createElement('tr');
@@ -71,9 +62,9 @@ function getInfo(id) {
                     let pTotal = document.createElement('td');
 
                     pName.innerHTML = currProd.product_name;
-                    pPrice.innerHTML = currProd.product_price;
+                    pPrice.innerHTML = currProd.product_price.toFixed(2) + " €";
                     pQuantity.innerHTML = currProd.quantity;
-                    pTotal.innerHTML = currProd.price;
+                    pTotal.innerHTML = currProd.price.toFixed(2) + " €";
                     
                     row.appendChild(pName);
                     row.appendChild(pPrice);
@@ -91,7 +82,20 @@ function hideOrder() {
     let order_content = document.getElementById("order-content");
     let shipping_content = document.getElementById("shipping-content");
     let orderIdText = document.getElementById("order-id-text");
+    let estimatedDeliveryText = document.getElementById("estimated-delivery-text");
     order_content.style.display = "none";
     shipping_content.style.display = "none";
     orderIdText.style.display = "none";
+    estimatedDeliveryText.style.display = "none";
+}
+
+
+let prev_orders = document.getElementById("prev-orders");
+prev_orders.onclick = () => {
+    window.location.href = "/orderhistory";
+}
+
+let home = document.getElementById("home");
+home.onclick = () => {
+    window.location.href = "/";
 }

@@ -1,0 +1,78 @@
+<%- include('header') -%>
+<section class="section is-small"></section>
+
+<section class="section level level-item">
+    <h1 class="title is-2">Order Details</h1>
+</section>
+
+<section class="section level level-item columns">
+
+    <div class="column"></div>
+    <div class="column is-two-fifths">
+        <div id="shipping-status">
+            <progress class="progress is-success" id="shipping-bar" value="0" max="100"></progress>
+            <p id="shipping-status-text"></p>
+            <p id="estimated-delivery"></p>
+        </div>
+    </div>
+    <div class="column"></div>
+    
+</section>
+
+<section class="columns">
+    <div class="column is-half">
+        <div id="order-section" class="card">
+            <div id="order-content" class="px-5 card-content">
+                <h2 class="title is-4">Order Summary</h2>
+                <p>Order #<span id="order-id"></span></p>
+                <p>Order placed at: <span id="order-time"></span> </p>
+                <p>Order total: <span id="order-total"></span>€</p>
+            </div>
+            
+            <div id="shipping-content" class="mb-5 card-content">
+                <h2 class="title is-4">Shipping details</h2>
+                <p><span id="shipping-name"></span></p>
+                <p><span id="shipping-address"></span></p>
+                <p><span id="shipping-city"></span></p>
+                <p><span id="shipping-county"></span></p>
+                <p><span id="shipping-country"></span></p>
+                <p><span id="shipping-eircode"></span></p>
+            </div>
+        </div>
+    </div>
+    <div class="column is-half">
+        <div id="products-content">
+            <table id="order-table" class="table card" height="100%" width="100%">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="order-table-body">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+
+<script type="text/javascript" src="/javascripts/individualorder.js"></script>
+<script>
+    let params = window.location.search;
+    let urlParams = new URLSearchParams(params);
+    let orderId = urlParams.get('id');
+    if (localStorage.getItem("accessToken") == null) {
+        window.location.href = "/login";
+    } else if (orderId != null || typeof(orderId) != 'undefined') {
+        getInfo(orderId);
+    } else {
+        getInfo(null);
+    }
+</script>
+
+<%- include('footer') -%>

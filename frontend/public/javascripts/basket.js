@@ -6,10 +6,10 @@ function createTableHeader(table) {
     let pPrice = document.createElement("th");
     let pQuantity = document.createElement("th");
     let bTotal = document.createElement("th");
-    pImg.innerHTML = "Product Image";
-    pName.innerHTML = "Product Name";
-    pPrice.innerHTML = "Product Price";
-    pQuantity.innerHTML = "Product Quantity";
+    pImg.innerHTML = "";
+    pName.innerHTML = "Name";
+    pPrice.innerHTML = "Price";
+    pQuantity.innerHTML = "Quantity";
     bTotal.innerHTML = "Total";
     header.appendChild(pImg);
     header.appendChild(pName);
@@ -93,6 +93,8 @@ function createBasket(isCheckout) {
 
         let table = document.createElement("table");
         table.setAttribute("id", "basketTable");
+        table.setAttribute("class", "table table-striped");
+        table.style.width = "100%";
         table = createTableHeader(table);
         let tbody = document.createElement("tbody");
         
@@ -112,9 +114,10 @@ function createBasket(isCheckout) {
 
 
 function addBasketBtn(id) {
-    let btn = document.createElement("button");
-    btn.innerHTML = "+";
+    let btn = document.createElement("a");
+    btn.innerHTML = "<span class='icon'><i class='fas fa-plus'></i></span>";
     btn.setAttribute("id", id);
+    btn.setAttribute("class", "button is-small is-primary ml-1 mr-1");
     btn.addEventListener("click", function() {
         // console.log(this.id);
         fetch('http://localhost:1111/apiadd/', {
@@ -135,9 +138,10 @@ function addBasketBtn(id) {
 }
 
 function removeBasketBtn(id) {
-    let btn = document.createElement("button");
-    btn.innerHTML = "-";
+    let btn = document.createElement("a");
+    btn.innerHTML = "<span class='icon'><i class='fas fa-minus'></i></span>";
     btn.setAttribute("id", id);
+    btn.setAttribute("class", "button is-small is-primary ml-1 mr-1");
     btn.addEventListener("click", function() {
         // console.log(this.id);
         fetch("http://localhost:1111/apiremove/", {
@@ -186,6 +190,8 @@ function updateBasket() {
 
         let table = document.createElement("table");
         table.setAttribute("id", "basketTable");
+        table.setAttribute("class", "table table-striped");
+        table.style.width = "100%";
         table = createTableHeader(table);
         let tbody = document.createElement("tbody");
         

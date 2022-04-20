@@ -1,7 +1,7 @@
 function submitOrder(event) {
     event.preventDefault();
 
-    let name = document.getElementById("name").value;
+    let name = document.getElementById("ordername").value;
     let address1 = document.getElementById("address1").value;
     let address2 = document.getElementById("address2").value;
     let city = document.getElementById("city").value;
@@ -10,35 +10,47 @@ function submitOrder(event) {
 
     let isValid = true;
 
-    if (address1 === "") {
-        console.log("Address line 1 is not valid");
+    if (name === "") {
+        document.getElementById("name-error").style.display = "block";
         isValid = false;
-    }
+      } else {
+        document.getElementById("name-error").style.display = "none";
+      }
+
+    if (address1 === "") {
+        document.getElementById("address1-error").style.display = "block";
+        isValid = false;
+      } else {
+        document.getElementById("address1-error").style.display = "none";
+      }
 
     if (address2 === "") {
-        console.log("Address line 2 is not valid");
+        document.getElementById("address2-error").style.display = "block";
         isValid = false;
-    }
+      } else {
+        document.getElementById("address2-error").style.display = "none";
+      }
 
     if (city === "") {
-        console.log("City is not valid");
+        document.getElementById("city-error").style.display = "block";
         isValid = false;
-    }
+      } else {
+        document.getElementById("city-error").style.display = "none";
+      }
 
-    if (county === "" || county === "Select County") {
-        console.log("County is not valid");
+        if (county === "" || county === "Select County") {
+        document.getElementById("county-error").style.display = "block";
         isValid = false;
-    }
-
-    if (eircode === "" || eircode.length !== 7) {
-        console.log("Eircode is not valid");
+      } else {
+        document.getElementById("county-error").style.display = "none";
+      }
+  
+      if (eircode === "" || eircode.length !== 7) {
+        document.getElementById("eircode-error").style.display = "block";
         isValid = false;
-    } 
-
-    if (name === "") {
-        console.log("Name is not valid");
-        isValid = false;
-    } 
+      } else {
+        document.getElementById("eircode-error").style.display = "none";
+      }
 
     if (isValid) {
         let basket = "http://localhost:1111/api/basket/";

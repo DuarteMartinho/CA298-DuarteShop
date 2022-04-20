@@ -3,24 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Duarte</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    
+    <link rel="icon" type="image/x-icon" href="/images/logo.svg">
+
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.13.10/dist/css/uikit.min.css" />
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.10/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.10/dist/js/uikit-icons.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <script src="https://kit.fontawesome.com/a002b1d1f4.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li>
-                <a href="/">Home</a>
-            </li>
-            <li>
-                <a href="/basket">Basket</a>
-            </li>
-            <li>
-                <a href="/myorders">My Order</a>
-            </li>
-            <li>
-                <a id="auth-link" href="/login"></a>
-            </li>
-        </ul>
+    <nav class="navbar is-fixed-top is-light" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/">
+              <img src="/images/logo.svg" width="112" height="28">
+            </a>
+        
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+            </div>
+        
+            <div class="navbar-end">
+              <div class="navbar-item">
+                <div id="logged-out-buttons" class="buttons" style="display: none;">
+                  <a class="button is-light" href="/login">
+                    Log in
+                  </a>
+                  <a class="button is-primary" href="/register">
+                    <strong>Register</strong>
+                  </a>
+                </div>
+              </div>
+              <div class="navbar-item">
+                <div id="logged-in-buttons" class="buttons" style="display: none;">
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="button is-light">
+                            <span class="icon-text">
+                                <span class="icon">
+                                    <i class="fa-solid fa-circle-user"></i>
+                                </span>
+                                <span>Profile</span>
+                            </span>
+                        </a>
+                
+                        <div class="navbar-dropdown is-right">
+                            <a class="navbar-item" href="/basket">
+                                Basket
+                            </a>
+                            <a class="navbar-item" href="/orderhistory">
+                                Order History
+                            </a>
+                            <hr class="navbar-divider">
+                            <a id="logout-btn" class="navbar-item">
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
     </nav>

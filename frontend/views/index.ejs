@@ -1,33 +1,88 @@
 <%- include('header') -%>
-
-<div id="main-content">
+<section class="section is-medium level level-item has-text-centered mt-5 mb-5">
+  <img src="/images/logo.svg" width="600" height="100">
+</section>
+<div id="main-content" class="content m-6">
 
 </div>
+<section class="section is-small"></section>
+
+<div id="other-info" class="content level level-item has-text-centered m-5">
+  <div class="tile is-ancestor">
+    <div class="tile is-vertical is-12">
+      <div class="tile">
+        <div class="tile is-parent is-vertical">
+          <article class="tile is-child notification is-primary">
+            <p class="title">
+              <i class="fa-solid fa-truck"></i>
+            </p>
+            <p class="subtitle">Free Shipping</p>
+          </article>
+        </div>
+        <div class="tile is-parent is-vertical">
+          <article class="tile is-child notification is-info">
+            <p class="title">
+              <i class="fa-solid fa-arrows-spin"></i>
+            </p>
+            <p class="subtitle">30 Days Returns</p>
+          </article>
+        </div>
+        <div class="tile is-parent">
+          <article class="tile is-child notification is-danger">
+            <p class="title">
+              <i class="fa-solid fa-lock"></i>
+            </p>
+            <p class="subtitle">Secure Payments</p>
+          </article>
+        </div>
+        <div class="tile is-parent">
+          <article class="tile is-child notification is-success">
+            <p class="title" style="color: white;">
+              <i class="fa-solid fa-tag"></i>
+            </p>
+            <p class="subtitle" style="color: white;">Best Prices</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="/javascripts/products.js"></script>
 <script>
   let req = "http://localhost:1111/api/products/"
     fetch(req) // make a request to this endpoint
       .then(response => response.json()) // with our response, get the json data returned
       .then((data) => {
         console.log(data);
+        let index = 0;
+        let newRow = document.createElement("div");
+        newRow.className = "columns";
         for (let i = 0; i < data.length; i++) {
-          let listItem = document.createElement('div');
-          let link = document.createElement('a');
-          let listImg = document.createElement('img');
-          link.innerHTML = data[i].name;
-          let productStr = "/product?id=" + data[i].id;
-          link.href = productStr;
-          listItem.innerHTML = data[i].name + ' ' + data[i].price + '<br>';
-          listImg.src = data[i].image;
-          listImg.alt = data[i].name;
-          listImg.height = 300;
-          listImg.width = 300;
-          listItem.appendChild(listImg);
-          listItem.appendChild(link);
-          document.getElementById("main-content").appendChild(listItem);
-        }
-      
-      }); // print the json data
+          let currentItem = data[i];
 
+          let card = document.createElement("div");
+          card.setAttribute("id", "card-" + i);
+          card.setAttribute("class", "column card m-5 px-5");
+
+          card.appendChild(cardImage(currentItem));
+          card.appendChild(cardContent(currentItem));
+          card.appendChild(cardFooter(currentItem));
+          newRow.appendChild(card);
+          console.log(newRow);
+          index++;
+          if (index == 3) {
+            index = 0;
+            document.getElementById("main-content").appendChild(newRow);
+            newRow = document.createElement("div");
+            newRow.className = "columns";
+          }
+        }
+
+        if (index != 0) {
+          document.getElementById("main-content").appendChild(newRow);
+        }      
+      }); // print the json data
       
   </script>
 

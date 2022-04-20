@@ -60,4 +60,4 @@ class Order(models.Model):
     country = models.CharField(max_length=7, default='IRELAND', editable=False)
     eircode = models.CharField(max_length=7, default = '')
     datetimeOrder = models.DateTimeField(auto_now_add=True)
-    total_price = models.DecimalField(max_digits=6, decimal_places=2, default=0.0)
+    total_price = models.DecimalField(max_digits=15, decimal_places=2, default=0.0)

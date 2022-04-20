@@ -190,7 +190,7 @@ class BasketViewSet(viewsets.ModelViewSet):
           return Basket.objects.all() # return all the baskets if a superuser requests
       else:
           # For normal users, only return the current active basket
-          shopping_basket = Basket.objects.filter(user_id=user, is_active=True)
+          shopping_basket = Basket.objects.filter(user_id=user)
           return shopping_basket
 
 class OrderViewSet(viewsets.ModelViewSet):

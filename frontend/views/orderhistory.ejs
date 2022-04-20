@@ -1,0 +1,24 @@
+<%- include('header') -%>
+<section class="section is-small"></section>
+
+<section class="section ">
+
+  <div>
+      <h1 class="title is-2">Order History</h1>
+  
+      <div id="order-history">
+  
+      </div>
+  </div>
+</section>
+
+<script type="text/javascript" src="/javascripts/orderhistory.js"></script>
+<script>
+  if (localStorage.getItem("accessToken") == null) {
+    window.location.href = "/login";
+  } else {
+    showOrdersHistory();
+  }
+</script>
+
+<%- include('footer') -%>

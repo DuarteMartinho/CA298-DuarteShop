@@ -32,4 +32,12 @@ router.get('/ordersuccess', function(req, res, next) {
   res.render('order_success');
 });
 
+router.get('/orderhistory', function(req, res, next) {
+  res.render('orderhistory');
+});
+
+router.get('/individualorder', function(req, res, next) {
+  res.render('individualorder');
+});
+
 module.exports = router;

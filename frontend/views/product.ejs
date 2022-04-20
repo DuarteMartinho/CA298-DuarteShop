@@ -1,12 +1,24 @@
 <%- include('header') -%>
+<section class="section is-small"></section>
+<div class="content m-5 px-5">
+  <div class="columns">
+    <div class="column is-half">
+      <figure class="image">
+        <img id="img" src="" height="600px">
+      </figure>
+    </div>
+    <div class="column">
+      <p id="title" class="title"></p>
+      <p id="desc" class="subtitle"></p>
+      <p><span id="price"></span> €</p>
+      <p>Usually dispatched within 5 to 7 days. ONLY SHIPS TO <strong>IRELAND</strong></p>
+      <p></p>
+      <button id="stock" class="button mt-2 mb-2 is-small"></button>
+      <br>
+      <button id="add-cart" class="button is-primary mt-2 mb-2">Add to Cart</button>
+    </div>
+  </div>
 
-<h1>Product</h1>
-<img id="img" src="" alt="">
-<div>
-  <p id="title"></p>
-  <p id="desc"></p>
-  <p id="price"></p>
-  <button id="add-cart">Add to Cart</button>
 </div>
 
 <script type="text/javascript" src="/javascripts/products.js"></script>

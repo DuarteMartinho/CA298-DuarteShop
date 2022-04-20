@@ -6,7 +6,7 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
         model = Product
         fields = [
             'id', 'name', 'description', 
-            'price', 'image', 'isOnSale']
+            'price', 'image', 'isOnSale', 'isInStock']
 
 class OrderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -104,7 +104,7 @@ class RemoveBasketItemSerializer(serializers.ModelSerializer):
 class CheckoutSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
-        fields = ['addressline1', 'addressline2', 'city', 'county', 'eircode']
+        fields = ['addressline1', 'addressline2', 'city', 'county', 'eircode', 'name']
 
     def create(self, validated_data):
         request = self.context.get('request', None)
@@ -114,6 +114,7 @@ class CheckoutSerializer(serializers.ModelSerializer):
         city = validated_data['city']
         county = validated_data['county']
         eircode = validated_data['eircode']
+        name = validated_data['name']
         # get the shopping basket
         # mark as inactive
         basket = Basket.objects.filter(user_id=current_user, is_active=True).first()
@@ -125,7 +126,7 @@ class CheckoutSerializer(serializers.ModelSerializer):
         for item in sbi:
             total += float(item.price())
         # create a new order 
-        order = Order.objects.create(basketId = basket, user_id = current_user, addressline1 = addressline1, addressline2 = addressline2, city = city, county = county, eircode = eircode, total_price = total )
+        order = Order.objects.create(basketId = basket, user_id = current_user, addressline1 = addressline1, addressline2 = addressline2, city = city, county = county, eircode = eircode, total_price = total, name = name)
         # create a new empty basket for the customer 
         new_basket = Basket.objects.create(user_id = current_user)# Create a shopping basket 
         # return the order

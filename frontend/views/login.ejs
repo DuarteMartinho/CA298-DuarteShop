@@ -1,17 +1,44 @@
 <%- include('header') -%>
+<section class="section is-small"></section>
 
-<h1>Login</h1>
-<form id="login-form">
-    <label for="username">Username</label>
-    <input type="text" name="username" id="username" placeholder="Your username" required>
-    <br>
-    <label for="password">Password</label>
-    <input type="password" id="password" name="password" placeholder="Your password" required>
-    <br>
-    <button type="submit">Login</button>
-    <p id="login-error" class="login-error"></p>
-</form>
-<p>Don't have an account ? <a href="/register">REGISTER</a></p>
+<section class="section level level-item columns">
+  <div class="column"></div>
+  <div class="column is-three-quarters">
+    <form id="login-form" class="box">
+      <h1 class="title">Login</h1>
+      <div class="field">
+        <label for="username" class="label">Username</label>
+        <div class="control has-icons-left">
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+          <input class="input" type="text" name="username" id="username" placeholder="Your username">
+        </div>
+        <p id="email-error" class="help is-danger" style="display: none;">
+          Email is required
+        </p>
+      </div>
+      <div class="field">
+        <label for="password" class="label">Password</label>
+        <div class="control has-icons-left">
+          <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+          <input class="input" type="password" id="password" name="password" placeholder="********">
+        </div>
+        <p id="password-error" class="help is-danger" style="display: none;">
+          Password is required
+        </p>
+      </div>
+      <button type="submit" class="button is-primary">Login</button>
+      <div class="mt-5">
+        <p>Don't have an account ? <a href="/register">REGISTER</a></p>
+      </div>
+        
+    </form>
+  </div>
+  <div class="column"></div>
+</section>
 <script>
   // your script goes here
 
@@ -19,12 +46,24 @@
     event.preventDefault();
     uname = document.getElementById("username");
     pass = document.getElementById("password");
-    error = document.getElementById("login-error");
+
+    let isValid = true;
+
     if (uname.value === "") {
-      error.innerHTML = "Username is not valid";
-    } else if (pass.value === "") {
-      error.innerHTML = "Password is not valid";
+      document.getElementById("email-error").style.display = "block";
+      isValid = false;
     } else {
+      document.getElementById("email-error").style.display = "none";
+    }
+    
+    if (pass.value === "") {
+      document.getElementById("password-error").style.display = "block";
+      isValid = false;
+    } else {
+      document.getElementById("password-error").style.display = "none";
+    }
+    
+    if (isValid) {
       fetch("http://localhost:1111/api/token/", {
         method: 'POST',
         headers: {
@@ -43,7 +82,7 @@
           window.location.href = "/";
         }
         else{
-          error.innerHTML = "Username or Password incorrect.";
+          UIkit.notification("<span><i class='fa-solid fa-close'></i></span> Username or Password incorrect", {status: 'danger', timeout: 1300, pos: 'bottom-right'});
         }
       });
     }
