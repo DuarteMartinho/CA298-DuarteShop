@@ -35,6 +35,7 @@ function getInfo(id) {
             let deliveryDate = new Date();
             deliveryDate.setDate(orderTime.getDate() + 5);
 
+
             if (diff > 5) {
                 shippingText.innerHTML = "Delivered on <strong>" + deliveryDate.getDate() + "/" + (deliveryDate.getMonth() + 1) + "/" + deliveryDate.getFullYear() + "</strong>";
                 estimatedDelivery.innerHTML = "<strong>Arrived</strong>";
