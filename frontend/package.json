@@ -5,6 +5,10 @@
   "scripts": {
     "start": "nodemon ./bin/www"
   },
+  
+  "engines": {
+    "node": "18.7.0"
+  },
   "dependencies": {
     "bulma": "^0.9.3",
     "cookie-parser": "~1.4.4",
