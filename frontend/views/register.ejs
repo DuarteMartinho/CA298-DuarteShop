@@ -86,7 +86,7 @@
     }
 
     if (isValid) {
-      fetch("http://localhost:1111/apiregister/", {
+      fetch("http://ca298-api.duartemartinho.com:8000/apiregister/", {
         method: 'POST',
         headers: {
         'Accept': 'application/json',
@@ -97,7 +97,7 @@
       .then(data => {
         console.log(data)
         if (data['username'] == uname.value) {
-          fetch("http://localhost:1111/api/token/", {
+          fetch("http://ca298-api.duartemartinho.com:8000/api/token/", {
             method: 'POST',
             headers: {
             'Accept': 'application/json',

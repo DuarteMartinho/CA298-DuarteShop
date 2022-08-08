@@ -29,7 +29,7 @@ function createtRow(basketData, isCheckout) {
     let pPrice = document.createElement("td");
     let pQuantity = document.createElement("td");
     let bTotal = document.createElement("td");
-    pImgTag.src = "http://localhost:1111/media/" + basketData.product_img;
+    pImgTag.src = "http://ca298-api.duartemartinho.com:8000/media/" + basketData.product_img;
     pImgTag.width = "150";
     pImgTag.height = "100";
     pImg.appendChild(pImgTag);
@@ -68,7 +68,7 @@ function createFooter(basketTotal) {
 }
 
 function createBasket(isCheckout) {
-    let req = "http://localhost:1111/api/basket/";
+    let req = "http://ca298-api.duartemartinho.com:8000/api/basket/";
     fetch(req, {
         method: 'GET',
         headers: {
@@ -120,7 +120,7 @@ function addBasketBtn(id) {
     btn.setAttribute("class", "button is-small is-primary ml-1 mr-1");
     btn.addEventListener("click", function() {
         // console.log(this.id);
-        fetch('http://localhost:1111/apiadd/', {
+        fetch('http://ca298-api.duartemartinho.com:8000/apiadd/', {
               method: 'POST',
               headers: {
                 'Accept': 'application/json',
@@ -144,7 +144,7 @@ function removeBasketBtn(id) {
     btn.setAttribute("class", "button is-small is-primary ml-1 mr-1");
     btn.addEventListener("click", function() {
         // console.log(this.id);
-        fetch("http://localhost:1111/apiremove/", {
+        fetch("http://ca298-api.duartemartinho.com:8000/apiremove/", {
             method: 'POST',
             headers: {
             'Accept': 'application/json',
@@ -165,7 +165,7 @@ function updateBasket() {
     let spinner = document.createElement("h2");
     spinner.innerHTML = "Updating basket...";
 
-    let req = "http://localhost:1111/api/basket/";
+    let req = "http://ca298-api.duartemartinho.com:8000/api/basket/";
     fetch(req, {
         method: 'GET',
         headers: {

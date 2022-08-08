@@ -1,6 +1,6 @@
 function getInfo(id) {
     
-    fetch("http://localhost:1111/api/order/" + id, {
+    fetch("http://ca298-api.duartemartinho.com:8000/api/order/" + id, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
@@ -88,7 +88,7 @@ function getInfo(id) {
                 let pQuantity = document.createElement('td');
                 let pTotal = document.createElement('td');
 
-                img.setAttribute('src', "http://localhost:1111/media/" + currProd.product_img);
+                img.setAttribute('src', "http://ca298-api.duartemartinho.com:8000/media/" + currProd.product_img);
                 img.setAttribute('alt', currProd.product_name);
                 img.setAttribute('width', '100');
                 img.setAttribute('height', '100');

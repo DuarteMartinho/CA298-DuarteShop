@@ -1,7 +1,7 @@
 function showOrdersHistory() {
     let order_history = document.getElementById("order-history");
 
-    fetch("http://localhost:1111/api/order/", {
+    fetch("http://ca298-api.duartemartinho.com:8000/api/order/", {
         method: 'GET',
         headers: {
             'Accept': 'application/json',

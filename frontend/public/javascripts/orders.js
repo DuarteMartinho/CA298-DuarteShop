@@ -53,7 +53,7 @@ function submitOrder(event) {
       }
 
     if (isValid) {
-        let basket = "http://localhost:1111/api/basket/";
+        let basket = "http://ca298-api.duartemartinho.com:8000/api/basket/";
         fetch(basket, {
             method: 'GET',
             headers: {
@@ -78,7 +78,7 @@ function submitOrder(event) {
                 console.log('No items in basket');
             } else {
 
-                fetch("http://localhost:1111/apicheckout/", {
+                fetch("http://ca298-api.duartemartinho.com:8000/apicheckout/", {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
@@ -92,7 +92,7 @@ function submitOrder(event) {
                     updateBasket();
                     if ('addressline1' in data && 'addressline2' in data && 'city' in data && 'county' in data && 'eircode' in data) {
                         console.log("Order submitted successfully");
-                        fetch("http://localhost:1111/api/order/", {
+                        fetch("http://ca298-api.duartemartinho.com:8000/api/order/", {
                             method: 'GET',
                             headers: {
                                 'Accept': 'application/json',

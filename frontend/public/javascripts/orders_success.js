@@ -3,7 +3,7 @@ function getInfo(id) {
         hideOrder();
         return;
     } else {
-        fetch("http://localhost:1111/api/order/" + id, {
+        fetch("http://ca298-api.duartemartinho.com:8000/api/order/" + id, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',

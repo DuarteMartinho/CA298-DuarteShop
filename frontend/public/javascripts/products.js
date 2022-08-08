@@ -1,5 +1,5 @@
 function getProduct(prodId) {
-    let req = "http://localhost:1111/api/products/" + prodId;
+    let req = "http://ca298-api.duartemartinho.com:8000/api/products/" + prodId;
 
     fetch(req) // make a request to this endpoint
       .then(response => response.json()) // with our response, get the json data returned
@@ -47,7 +47,7 @@ function getProduct(prodId) {
 
 function addToCart(prodId) {
     console.log(prodId);
-    fetch('http://localhost:1111/apiadd/', {
+    fetch('http://ca298-api.duartemartinho.com:8000/apiadd/', {
         method: 'POST',
         headers: {
         'Accept': 'application/json',
